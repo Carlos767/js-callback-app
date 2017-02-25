@@ -8,10 +8,11 @@ $.get('https://data.sfgov.org/resource/ptw6-erc8.json', function(response) {
   var htmlString = "";
 
   for (var i = 0; i < response.length; i++){
-    htmlString += '<div onclick="changeAirLinesColor(this)">';
+    htmlString += '<div class="planes" onclick="changeAirLinesColor(this)">';
     htmlString += '<h3>' + response[i].operating_airline +'</h3>';
     htmlString += '<p>' + response[i].aircraft_manufacturer +'</p>';
     htmlString += '<p>' + response[i].aircraft_model +'</p>';
+    htmlString += '</div>';
   }
 
   responseDiv.innerHTML = htmlString;
@@ -24,6 +25,26 @@ function changeAirLinesColor(airLinesDiv){
     airLinesDiv.style.color = "black";
   } else {
     airLinesDiv.style.color = "white";
+  }
+}
+
+function showAllPlanes() {
+  var planes = document.querySelectorAll('.planes');
+  for(var i = 0; i < planes.length; i++) {
+    var plane = planes[i];
+    plane.style.display = "";
+  }
+}
+
+function showBoeingPlanes() {
+  var planes = document.querySelectorAll('.planes');
+  for(var i = 0; i < planes.length; i++) {
+    var plane = planes[i];
+    if(plane.innerHTML.indexOf("Boeing")!== -1) {
+      plane.style.display = "";
+    } else {
+      plane.style.display = "none";
+    }
   }
 }
 
